@@ -46,6 +46,20 @@ const solicitarPrestamo = (monto, cuotas) => {
     }
 }
 
+const consultarMovimientos = (tipoMovimiento) => {
+    if(tipoMovimiento === 1){       // Plazos fijos
+        let plazosFijos = arraysPlazosFijos.length;
+        alert(`${user}: Has realizado ${plazosFijos} plazos fijos. Consulta la consola (tecla F12) para obtener mas información.`)
+        for(let i = 0; i < plazosFijos; i++){
+            console.log(`Plazo fijo N°${i+1}: Capital invertido: ${arraysPlazosFijos[i].monto}, a ${arraysPlazosFijos[i].dias} días que generará ${arraysPlazosFijos[i].interes} de interes`)
+        }
+    }else if(tipoMovimiento === 2){ // Prestamos
+
+    }else{                          // ERROR INESPERADO 
+
+    }
+}
+
 const realizarOperacion = (tipoOperacion) => {
     switch(tipoOperacion){
         case 1: // Hacer plazo fijo
@@ -61,7 +75,18 @@ const realizarOperacion = (tipoOperacion) => {
             solicitarPrestamo(montoPrestamo, cuotasPrestamo);
             break;
         case 3: // Consultar plazos fijos creados
-            // ---
+            if(arraysPlazosFijos.length <= 0){
+                alert("Actualmente no hay ningún plazo fijo creado.");
+            }else{
+                consultarMovimientos(1);
+            }
+            break;
+        case 4: // Consultar prestamos solicitados
+            if(arraysCuotasPrestamos.length <= 0){
+                alert("No has solicitado ningún prestamo hasta el momento.");
+            }else{
+                consultarMovimientos(2);
+            }
             break;
         default:
             alert("Ingresó una opcion inválida.");
@@ -101,17 +126,16 @@ function main(){
     }
 
     if(ingresoCorrecto == true){
-        let tipoOperacion = parseInt(prompt(`Bienvenido a su cuenta ${user}, posee un saldo de $${saldo} ¿Que operación desea realizar? \nIngrese 1 para constituir un plazo fijo \nIngrese 2 para solicitar un prestamo`))
         let loopOperacion = true;
         while(loopOperacion)
         {
+            let tipoOperacion = parseInt(prompt(`Bienvenido a su cuenta ${user}, posee un saldo de $${saldo} ¿Que operación desea realizar? \nIngrese 1 para constituir un plazo fijo \nIngrese 2 para solicitar un prestamo\nIngrese 3 para consultar sus plazos fijos existentes`))
+        
             realizarOperacion(tipoOperacion);
             
             loopOperacion = confirm("¿Desea realizar otra operación?")
             if(loopOperacion == false){
                 alert("Gracias por utilizar nuestros servicios!")
-            }else{
-                tipoOperacion = parseInt(prompt(`Bienvenido a su cuenta ${user}, posee un saldo de $${saldo} ¿Que operación desea realizar? \nIngrese 1 para constituir un plazo fijo \nIngrese 2 para solicitar un prestamo\nIngrese 3 para consultar sus plazos fijos existentes`))
             }
         }
     }
