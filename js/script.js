@@ -18,12 +18,12 @@ const crearPlazoFijo = (monto, dias) => {
         return false;
     }
     let interes = parseInt(monto * (dias * (TNA / 360)));
-    let confirmacion = confirm(`Va a invertir ${monto} por ${dias} días, lo cual le va a generar un interes de $${interes}, es correcto?`);
+    let confirmacion = confirm(`Va a invertir $${monto} por ${dias} días, lo cual le va a generar un interes de $${interes}, es correcto?`);
     if(confirmacion === true){
         saldo -= monto;
-        alert("Plazo fijo generado con exito!")
         arraysPlazosFijos.push({monto, dias, interes})
-        console.table(arraysPlazosFijos)
+        console.log(`Plazo fijo creado, capital invertido: $${monto}, a ${dias} días que generará $${interes} de interes. Saldo restante: $${saldo}`)
+        alert(`Plazo fijo generado con exito!\nAhora su saldo es de $${saldo} `)
     }
 }
 
@@ -35,28 +35,33 @@ const solicitarPrestamo = (monto, cuotas) => {
         alert("La cantidad de cuotas mensuales debe ser mayor a 1 e inferior a 12");
         return false;
     }
-    let valorCuota = (monto / cuotas) + ((monto * (cuotas * interesCuotasMensuales)) / cuotas);
+    let valorCuota = (monto / cuotas) + (((monto * (cuotas * interesCuotasMensuales))) / cuotas);
     let confirmacion = confirm(`Va a solicitar un prestamo por $${monto} a pagar en ${cuotas} cuotas fijas mensuales de $${valorCuota} cada una, si es correcto seleccione "Confirmar"`);
     if(confirmacion === true){
         saldo += monto;
+        arraysCuotasPrestamos.push({monto, cuotas, valorCuota})
+        console.log(`Prestamo solicitado: $${monto} a pagar en ${cuotas} cuotas mensuales de $${valorCuota} cada una. Nuevo saldo: $${saldo}`)
         alert(`Prestamo solicitado con éxito!\nAhora su saldo es de $${saldo} `)
-        arraysCuotasPrestamos.push({cuotas, valorCuota})
-        console.table(arraysCuotasPrestamos)
-        console.log(arraysCuotasPrestamos)
     }
 }
 
 const consultarMovimientos = (tipoMovimiento) => {
     if(tipoMovimiento === 1){       // Plazos fijos
         let plazosFijos = arraysPlazosFijos.length;
-        alert(`${user}: Has realizado ${plazosFijos} plazos fijos. Consulta la consola (tecla F12) para obtener mas información.`)
         for(let i = 0; i < plazosFijos; i++){
-            console.log(`Plazo fijo N°${i+1}: Capital invertido: ${arraysPlazosFijos[i].monto}, a ${arraysPlazosFijos[i].dias} días que generará ${arraysPlazosFijos[i].interes} de interes`)
+            console.log(`Plazo fijo N°${i+1}: Capital invertido: $${arraysPlazosFijos[i].monto}, a ${arraysPlazosFijos[i].dias} días que generará $${arraysPlazosFijos[i].interes} de interes`)
         }
+        alert(`${user}: Has realizado ${plazosFijos} plazos fijos. Consulta la consola para obtener mas información.`)
     }else if(tipoMovimiento === 2){ // Prestamos
-
+        let prestamosImpagos = arraysCuotasPrestamos.length;
+        let totalMontoPrestamos = 0;
+        for(let i = 0; i < prestamosImpagos; i++){
+            totalMontoPrestamos += arraysCuotasPrestamos[i].monto;
+            console.log(`Prestamo N°${i+1}: Monto solicitado: $${arraysCuotasPrestamos[i].monto} a pagar en ${arraysCuotasPrestamos[i].cuotas} cuotas mensuales de $${arraysCuotasPrestamos[i].valorCuota} cada una.`)
+        }
+        alert(`${user}: Has solicitado ${prestamosImpagos} prestamos por un total de $${totalMontoPrestamos} . Consulta la consola para obtener mas información.`)
     }else{                          // ERROR INESPERADO 
-
+        console.log("Función consultarMovimientos(tipoMovimiento) llamada con un parametro incorrecto!")    // Si no cometo un error no se debería de ejecutar jamas, pero por si acaso
     }
 }
 
@@ -129,7 +134,7 @@ function main(){
         let loopOperacion = true;
         while(loopOperacion)
         {
-            let tipoOperacion = parseInt(prompt(`Bienvenido a su cuenta ${user}, posee un saldo de $${saldo} ¿Que operación desea realizar? \nIngrese 1 para constituir un plazo fijo \nIngrese 2 para solicitar un prestamo\nIngrese 3 para consultar sus plazos fijos existentes`))
+            let tipoOperacion = parseInt(prompt(`Bienvenido a su cuenta ${user}, posee un saldo de $${saldo} ¿Que operación desea realizar? \nIngrese 1 para constituir un plazo fijo \nIngrese 2 para solicitar un prestamo\nIngrese 3 para consultar sus plazos fijos existentes\nIngrese 4 para consultar su historial de prestamos`))
         
             realizarOperacion(tipoOperacion);
             
