@@ -35,7 +35,7 @@ const solicitarPrestamo = (monto, cuotas) => {
         alert("La cantidad de cuotas mensuales debe ser mayor a 1 e inferior a 12");
         return false;
     }
-    let valorCuota = (monto / cuotas) + (((monto * (cuotas * interesCuotasMensuales))) / cuotas);
+    let valorCuota = (monto / cuotas) + ((monto * (cuotas * interesCuotasMensuales)) / cuotas);
     let confirmacion = confirm(`Va a solicitar un prestamo por $${monto} a pagar en ${cuotas} cuotas fijas mensuales de $${valorCuota} cada una, si es correcto seleccione "Confirmar"`);
     if(confirmacion === true){
         saldo += monto;
