@@ -6,22 +6,32 @@
     <title>Panel de usuario</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Bienvenido a su HomeBanking</h1>
-    <div class="ejemplo" id="eventos">
-        <ul>
-            <li>-</li>
-            <li>-</li>
-            <li>-</li>
-        </ul>
-
-        <ul>
-            <button type="button" id="botonPlazoF"> Crear un plazo fijo </button>
-        </ul>
+<body class="body">
+    <div class="tituloBienvenida">
+        <h2 id="mensajeUsuario"></h2>
+        <h3 id="saldoUsuario"></h3>
+        <button type="button" class="boton" id="botonCerrarSesion"> Cerrar sesión </button>
     </div>
-    <p>    </p>
-    <form id="formAcciones">        
-    </form>
+    <table>
+        <caption id="mensajeResultado" class="verde">        </caption>
+        <tr>
+            <td>
+                <div class="ejemplo" id="eventos">
+                    <ul>
+                        <button type="button" class="boton" id="botonPlazoF"> Crear un plazo fijo </button>
+                        <button type="button" class="boton" id="botonPedirPrestamo"> Solicitar un prestamo </button>
+                        <button type="button" class="boton" id="botonConsultaPF"> Consultar plazos fijos </button>
+                        <button type="button" class="boton" id="botonConsultaPrest"> Consultar prestamos </button>
+                    </ul>
+                </div>
+            </td>
+            <td class="columnaPrueba">
+                <h3 id="textoDetalles"></h3>
+                <form id="formAcciones">        
+                </form>
+            </td>
+        </tr>
+    </table>
     <script src="./panelUsuario.js"></script>
 </body>
 </html>

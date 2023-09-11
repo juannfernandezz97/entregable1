@@ -7,7 +7,59 @@
 }
 
 .ejemplo{
-    background-color: blueviolet;
+    background-color:aquamarine;
+    padding-top: 50px;
+    width: 300px;
+    height: 300px;
+}
+
+.principal{
+    background-color:aquamarine;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 50px;
+    width: 300px;
+    height: 250px;
+}
+
+.infoPrincipal{
+    padding-top: 10px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 100px;
+}
+
+.body{
+    background-color:lightskyblue;
+    font-family: "Arial", Times, serif;
+}
+
+.tituloBienvenida{
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    width: 650px;
+    height: 150px;
+}
+
+.boton{
+    margin: 5px;
+    padding: 15px 32px;
     width: 200px;
+}
+
+.otro{
+background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.columnaPrueba{
+    width: 300px;
     height: 200px;
+    padding: 10px;
 }

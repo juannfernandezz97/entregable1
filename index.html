@@ -4,13 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de HombeBanking</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="body">
+    <div class="principal">
+        <h2 id="msgIngresoFallido" class="rojo"></h2>
     <form id="ingresar">
-        <input type="text" name="usuario" placeholder="usuario" id="usuario">
-        <input type="password" name="contrasenia" placeholder="contraseña" id="contrasenia">
-        <input type="submit" placeholder="submit">
+        <label for="usuario">Usuario:</label>
+        <input class="boton" type="text" name="usuario" placeholder="usuario" id="usuario">
+        <label for="contrasenia">Contraseña:</label>
+        <input class="boton" type="password" name="contrasenia" placeholder="contraseña" id="contrasenia">
+        <input type="submit" class="boton" placeholder="submit">
     </form>
+</div>
+    <div class="infoPrincipal"></div>
+    <h2>Para probar usar los datos:</h2>
+    <ul>
+        <li>Usuario: juan</li>
+        <li>Contraseña: 12345</li>
+    </ul>
+    <h3>Nota: si te gastas todo el saldo, al actualizar la pagina volves a tener $100.000</h3>
+</div>
     <script src="./Sistema.js"></script>
 </body>
 </html>
