@@ -23,11 +23,11 @@ const validarLogin = (usario, contrasenia) => {
             return true;
         }
         else{
-            mensajeResultado.innerText = "La contraseña ingresada es incorrecta"
+            mensajeIngreso.innerText = "La contraseña ingresada es incorrecta"
             return false;
         }
     }else{
-        mensajeResultado.innerText = "l nombre de usuario ingresado es incorrecto"
+        mensajeIngreso.innerText = "El nombre de usuario ingresado es incorrecto"
         return false;
     }
 }

@@ -1,9 +1,9 @@
 const usuario = sessionStorage.getItem("usuarioLogeado")
-let saldo = localStorage.getItem("saldoUsuario")
+let saldo = 0
 const TNA = 0.97 // Ya que la TNA es de 97%
 const interesCuotasMensuales = 0.20; // Esto es porque vamos a cobrar un 20% de interes mensual en las cuotas (hermoso banco)
 let arraysPlazosFijos = [];   // Va a contener los arrays con los plazos fijos que se vayan generando
-const arraysCuotasPrestamos = [];   // Va a contener los arrays con las cuotas pendientes de pago por prestamos
+let arraysCuotasPrestamos = [];   // Va a contener los arrays con las cuotas pendientes de pago por prestamos
 let operacionActual = 0; // Solo lo uso para usar el mismo form para todas las operaciones, entonces con esta variable indico cual es la operacion que se está realizando actualmente
 
 const cerrarSesion = document.getElementById("botonCerrarSesion")
@@ -229,9 +229,13 @@ function validarUsuarioLogeado(){
     }
     saludarUsuario.innerText = `Bievenido ${usuario}`
 
-    if(saldo <= 0){
+    let verificarSalgoGuardado = localStorage.getItem("saldoUsuario")
+    if(isNaN(verificarSalgoGuardado) || parseInt(verificarSalgoGuardado) === 0){
+        console.log("El saldo guardado no era un numero o no habia saldo guardado, ahora es 100.000")
         saldo = 100000;
         localStorage.setItem("saldoUsuario", saldo);
+    }else{
+        saldo = parseInt(verificarSalgoGuardado);
     }
 
     actualizarSaldoUsuario();
@@ -242,6 +246,11 @@ function validarUsuarioLogeado(){
         arraysPlazosFijos = JSON.parse(ConseguirPlazosFijos)
     }
 
+    const ConseguirCuotasPrestamos = localStorage.getItem("PrestamosSolicitados");
+    console.log(ConseguirCuotasPrestamos);
+    if(ConseguirCuotasPrestamos != null){   // Check si es que existe guardado en localStorage algún plazo fijo
+        arraysCuotasPrestamos = JSON.parse(ConseguirCuotasPrestamos)
+    }
 }
 
 validarUsuarioLogeado();
