@@ -96,8 +96,6 @@ const solicitarPrestamo = (monto, cuotas) => {
 }
 
 const limpiarFormPanel = () => {
-    //alert("Eliminando contenido del form")
-    
     if(operacionActual === 1){
         const borrarMonto = document.getElementById("monto")
         const borrarDias = document.getElementById("dias")
@@ -153,7 +151,6 @@ consultaPF.addEventListener("click",()=>{
         </ul>
         `
         for(let i = 0; i < plazosFijos; i++){
-            //console.log(`Plazo fijo N°${i+1}: Capital invertido: $${arraysPlazosFijos[i].monto}, a ${arraysPlazosFijos[i].dias} días que generará $${arraysPlazosFijos[i].interes} de interes`)
             const listaPF = document.createElement("li")
             listaPF.innerText = `Plazo fijo N°${i+1}: Capital invertido: $${arraysPlazosFijos[i].monto}, a ${arraysPlazosFijos[i].dias} días que generará $${arraysPlazosFijos[i].interes} de interes`
             panel.appendChild(listaPF)
@@ -174,9 +171,7 @@ consultaPrest.addEventListener("click",()=>{
         <ul class="verde">
         </ul>
         `
-        //alert(`${user}: Has solicitado ${prestamosPagando} prestamos por un total de $${totalMontoPrestamos} . Consulta la consola para obtener mas información.`)
         for(let i = 0; i < prestamosPagando; i++){
-            //console.log(`Plazo fijo N°${i+1}: Capital invertido: $${arraysPlazosFijos[i].monto}, a ${arraysPlazosFijos[i].dias} días que generará $${arraysPlazosFijos[i].interes} de interes`)
             const listaPrestamos = document.createElement("li")
             listaPrestamos.innerText = `Prestamo N°${i+1}: Monto solicitado: $${arraysCuotasPrestamos[i].monto} a pagar en ${arraysCuotasPrestamos[i].cuotas} cuotas mensuales de $${arraysCuotasPrestamos[i].valorCuota} cada una.`
             panel.appendChild(listaPrestamos)
@@ -241,13 +236,11 @@ function validarUsuarioLogeado(){
     actualizarSaldoUsuario();
 
     const ConseguirPlazosFijos = localStorage.getItem("PlazosFijos");
-    console.log(ConseguirPlazosFijos);
     if(ConseguirPlazosFijos != null){   // Check si es que existe guardado en localStorage algún plazo fijo
         arraysPlazosFijos = JSON.parse(ConseguirPlazosFijos)
     }
 
     const ConseguirCuotasPrestamos = localStorage.getItem("PrestamosSolicitados");
-    console.log(ConseguirCuotasPrestamos);
     if(ConseguirCuotasPrestamos != null){   // Check si es que existe guardado en localStorage algún plazo fijo
         arraysCuotasPrestamos = JSON.parse(ConseguirCuotasPrestamos)
     }
