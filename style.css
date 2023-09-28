@@ -13,6 +13,11 @@
     height: 300px;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+}
+
 .principal{
     background-color:aquamarine;
     padding-top: 20px;

@@ -1,0 +1,10 @@
+[
+    {
+        "cuenta": "juan", 
+        "contrasenia": "12345"
+    }, 
+    {
+        "cuenta": "pepe", 
+        "contrasenia": "juan123"
+    }
+]

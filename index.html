@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="body">
-    <div class="principal">
-        <h4 id="msgIngresoFallido" class="rojo"></h2>
-    <form id="ingresar">
-        <label for="usuario">Usuario:</label>
-        <input class="boton" type="text" name="usuario" placeholder="usuario" id="usuario">
-        <label for="contrasenia">Contraseña:</label>
-        <input class="boton" type="password" name="contrasenia" placeholder="contraseña" id="contrasenia">
-        <input type="submit" class="boton" placeholder="submit">
-    </form>
-</div>
+    <div class="container">
+        <div class="principal">
+            <h4 id="msgIngresoFallido" class="rojo"></h2>
+            <form id="ingresar">
+                <label for="usuario">Usuario:</label>
+                <input class="boton" type="text" name="usuario" placeholder="usuario" id="usuario">
+                <label for="contrasenia">Contraseña:</label>
+                <input class="boton" type="password" name="contrasenia" placeholder="contraseña" id="contrasenia">
+                <input type="submit" class="boton" placeholder="submit">
+            </form>
+        </div>
+    </div>
     <div class="infoPrincipal"></div>
     <h2>Para probar usar los datos:</h2>
     <ul>
@@ -25,6 +27,9 @@
     </ul>
     <h3>Nota: si te gastas todo el saldo, al actualizar la pagina volves a tener $100.000</h3>
 </div>
+    <!-- librerias -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- codigo propio -->
     <script src="./js/Sistema.js"></script>
 </body>
 </html>
