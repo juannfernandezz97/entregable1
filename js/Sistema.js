@@ -1,11 +1,7 @@
-const user = "juan"
-const pass = "12345"
-
 const datosIngreso = [];
 
 const formulario = document.getElementById("ingresar")
 const sesionIniciada = sessionStorage.getItem("logeado")
-const mensajeIngreso = document.getElementById("msgIngresoFallido")
 //console.log(formulario.innerHTML)
 function checkUsuarioLogeado(){
     if(sesionIniciada === "1"){
@@ -41,6 +37,7 @@ async function obtenerDatosIngreso(){
         const datos = await datosSinProcesar.json()
         datos.forEach(elemento => {
             datosIngreso.push(elemento)
+            //console.log(`cuenta:${elemento.cuenta} saldo: ${elemento.saldo}`);
         });
     } catch (e) {
         mostrarMensajeError("Estamos teniendo problemas para acceder a la base de datos, por favor intente nuevamente mas tarde.");
@@ -48,7 +45,7 @@ async function obtenerDatosIngreso(){
 }
 
 const validarLogin = (usuario, contrasenia) => {
-    // No uso .ToLowerCase porque porque tratandose de datos de sesión deberian distinguirse entre mayusculas y minusculas ¿No?
+    // No uso .ToLowerCase porque porque tratandose de datos de sesión deberian distinguirse entre mayusculas y minusculas
     if(datosIngreso.length <= 0){   // No hay cuentas en el archivo .json o no se cargaron por X motivo
         mostrarMensajeError("Estamos teniendo problemas para acceder a la base de datos, por favor intente nuevamente mas tarde.");
         return false;
@@ -71,8 +68,6 @@ const validarLogin = (usuario, contrasenia) => {
 
 formulario.addEventListener("submit", (evento)=>{
     evento.preventDefault()
-    //console.log(evento.target[0].value)
-    //console.log(evento.target[1].value)
     let usuario = evento.target[0].value;
     let contrasenia = evento.target[1].value;
     let ingresoOk = validarLogin(usuario, contrasenia);

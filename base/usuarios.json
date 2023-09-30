@@ -1,10 +1,12 @@
 [
     {
         "cuenta": "juan", 
-        "contrasenia": "12345"
+        "contrasenia": "12345",
+        "saldo": 100000
     }, 
     {
         "cuenta": "pepe", 
-        "contrasenia": "juan123"
+        "contrasenia": "test123",
+        "saldo": 5000000
     }
 ]

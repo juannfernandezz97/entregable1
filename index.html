@@ -9,7 +9,6 @@
 <body class="body">
     <div class="container">
         <div class="principal">
-            <h4 id="msgIngresoFallido" class="rojo"></h2>
             <form id="ingresar">
                 <label for="usuario">Usuario:</label>
                 <input class="boton" type="text" name="usuario" placeholder="usuario" id="usuario">
@@ -20,12 +19,23 @@
         </div>
     </div>
     <div class="infoPrincipal"></div>
-    <h2>Para probar usar los datos:</h2>
+    <h2>Cuentas para probar:</h2>
     <ul>
-        <li>Usuario: juan</li>
+        <li>Usuario 1: juan</li>
         <li>Contraseña: 12345</li>
+        <li>Saldo inicial: $100.000</li>
     </ul>
-    <h3>Nota: si te gastas todo el saldo, al actualizar la pagina volves a tener $100.000</h3>
+    <ul>
+        <li>Usuario 2: pepe</li>
+        <li>Contraseña: test123</li>
+        <li>Saldo inicial: $5.000.000</li>
+    </ul>
+    <h3>Notas:
+        <ul>
+            <li>Si te gastas todo el saldo, al actualizar la pagina volves a tener $100.000</li>
+            <li>El saldo y los plazos fijos/prestamos se guardan en el LocalStorage</li>
+        </ul>
+    </h3>
 </div>
     <!-- librerias -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
