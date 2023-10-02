@@ -37,6 +37,10 @@ function mostrarMensajito(mensaje,  icono){
     })
 }
 
+function separadorDeMiles(x) {  // Esta función me la robé de internet
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 function cartelConfirmarTransf(monto, cbu){
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -76,29 +80,24 @@ function cartelConfirmarTransf(monto, cbu){
 const realizarTransf = (monto, cbu) => {
     if(isNaN(monto) || monto <= 0){
         mostrarMensajito("Ingrese un monto a transferir válido!", "error");
-        limpiarFormPanel();
         return false;
     }else if(isNaN(cbu) || cbu.length != 16){
         mostrarMensajito("El CBU/CVU debe ser un numero de 16 digitos!", "warning")
-        limpiarFormPanel();
         return false;
     }else if(parseInt(monto) > saldo){
         mostrarMensajito("El monto ingresado no puede ser superior a su saldo disponible!", "error")
-        limpiarFormPanel();
         return false;
     }else if(parseInt(monto) < 100){
         mostrarMensajito("El monto mínimo para transferencias es de $100", "warning")
-        limpiarFormPanel();
         return false;
     }else if(parseInt(cbu) <= 0){
         mostrarMensajito("Revise el CBU/CVU ingresado e intente nuevemente", "error")
-        limpiarFormPanel();
         return false;
     }
 
     Swal.fire({
         title: 'Realizar transferencia',
-        text: `Vas a transferir $${monto} al CBU/CVU: ${cbu}`,
+        text: `Vas a transferir $${separadorDeMiles(monto)} al CBU/CVU: ${cbu}`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -123,23 +122,18 @@ const realizarTransf = (monto, cbu) => {
 const crearPlazoFijo = (monto, dias) => {
     if(isNaN(monto) || monto <= 0){
         mostrarMensajito("Ingrese un monto válido!", "error");
-        limpiarFormPanel();
         return false;
     }else if(isNaN(dias) || dias <= 0){
         mostrarMensajito("Ingrese una cantidad de dias válida!", "error")
-        limpiarFormPanel();
         return false;
     }else if(parseInt(monto) > saldo){
         mostrarMensajito("El monto ingresado no puede ser superior a su saldo disponible!", "error")
-        limpiarFormPanel();
         return false;
     }else if(parseInt(monto) < 1000){
         mostrarMensajito("El monto mínimo a invertir es de $1.000", "error")
-        limpiarFormPanel();
         return false;
     }else if(parseInt(dias) < 30){
         mostrarMensajito("El plazo mínimo para la constitucion de un plazo fijo es de 30 dias", "error")
-        limpiarFormPanel();
         return false;
     }
     let interes = parseInt(monto * (dias * (TNA / 360)));
@@ -152,26 +146,22 @@ const crearPlazoFijo = (monto, dias) => {
     let PlazosJSON = JSON.stringify(arraysPlazosFijos);
     localStorage.setItem(`PlazosFijos_${usuario}`, PlazosJSON);
 
-    mostrarMensajito(`Creó un plazo fijo de $${monto} a ${dias} días exitosamente`, "success")
+    mostrarMensajito(`Creó un plazo fijo de $${separadorDeMiles(monto)} a ${dias} días exitosamente`, "success")
     limpiarFormPanel();
 }
 
 const solicitarPrestamo = (monto, cuotas) => {
     if(isNaN(monto) || monto <= 0){
         mostrarMensajito("Ingrese un monto válido!", "error")
-        limpiarFormPanel();
         return false;
     }else if(isNaN(cuotas) || cuotas <= 0){
         mostrarMensajito("Ingrese un número de cuotas válido!", "error")
-        limpiarFormPanel();
         return false;
     }else if(parseInt(monto) < 1000){
         mostrarMensajito("El monto mínimo de un prestamo es de $1.000", "error")
-        limpiarFormPanel();
         return false;
     }else if(parseInt(cuotas) < 1 || parseInt(cuotas) > 12){
         mostrarMensajito("La cantidad de cuotas mensuales debe ser mayor a 1 e inferior a 12", "error")
-        limpiarFormPanel();
         return false;
     }
     let valorCuota = parseInt((parseInt(monto) / parseInt(cuotas)) + ((parseInt(monto) * (parseInt(cuotas) * interesCuotasMensuales)) / parseInt(cuotas)));
@@ -183,7 +173,7 @@ const solicitarPrestamo = (monto, cuotas) => {
     let PrestamosJSON = JSON.stringify(arraysCuotasPrestamos);
     localStorage.setItem(`Prestamos_${usuario}`, PrestamosJSON);
 
-    mostrarMensajito(`Ya tenés acreditado tu prestamo de $${monto} a pagar en ${cuotas} cuotas de ${valorCuota} cada una.`, "success")
+    mostrarMensajito(`Ya tenés acreditado tu prestamo de $${separadorDeMiles(monto)} a pagar en ${cuotas} cuotas de ${valorCuota} cada una.`, "success")
     limpiarFormPanel();
 }
 
@@ -260,7 +250,7 @@ consultaPF.addEventListener("click",()=>{
         `
         for(let i = 0; i < plazosFijos; i++){
             const listaPF = document.createElement("li")
-            listaPF.innerText = `Plazo fijo N°${i+1}: Capital invertido: $${arraysPlazosFijos[i].monto}, a ${arraysPlazosFijos[i].dias} días que generará $${arraysPlazosFijos[i].interes} de interes`
+            listaPF.innerText = `Plazo fijo N°${i+1}: Capital invertido: $${separadorDeMiles(arraysPlazosFijos[i].monto)}, a ${arraysPlazosFijos[i].dias} días que generará $${separadorDeMiles(arraysPlazosFijos[i].interes)} de interes`
             panel.appendChild(listaPF)
         }
     }
@@ -281,7 +271,7 @@ consultaPrest.addEventListener("click",()=>{
         `
         for(let i = 0; i < prestamosPagando; i++){
             const listaPrestamos = document.createElement("li")
-            listaPrestamos.innerText = `Prestamo N°${i+1}: Monto solicitado: $${arraysCuotasPrestamos[i].monto} a pagar en ${arraysCuotasPrestamos[i].cuotas} cuotas mensuales de $${arraysCuotasPrestamos[i].valorCuota} cada una.`
+            listaPrestamos.innerText = `Prestamo N°${i+1}: Monto solicitado: $${separadorDeMiles(arraysCuotasPrestamos[i].monto)} a pagar en ${arraysCuotasPrestamos[i].cuotas} cuotas mensuales de $${separadorDeMiles(arraysCuotasPrestamos[i].valorCuota)} cada una.`
             panel.appendChild(listaPrestamos)
         }
     }
@@ -297,7 +287,7 @@ panel.addEventListener("submit", (evento)=>{
     evento.preventDefault(0)
     const datos = new FormData(evento.target)
     const cliente = Object.fromEntries(datos)
-    console.log(cliente)
+    //console.log(cliente)
 
     switch(operacionActual){
         case 1: // Hacer plazo fijo
@@ -321,10 +311,6 @@ panel.addEventListener("submit", (evento)=>{
     }
 })
 
-function separadorDeMiles(x) {  // Esta función me la robé de internet
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
 function actualizarSaldoUsuario(){
     mostrarSaldo.innerText = `Tu saldo es: $${separadorDeMiles(saldo)}`
 }
@@ -338,13 +324,13 @@ async function obtenerSaldoGuardado(usuarioLogeado){
             if(elemento.cuenta === usuarioLogeado){
                 //alert("asdasda")
                 let verificarSaldoGuardado = parseInt(localStorage.getItem(`saldo_${usuario}`))
-                console.log(verificarSaldoGuardado)
+                //console.log(verificarSaldoGuardado)
                 if(isNaN(verificarSaldoGuardado) || parseInt(verificarSaldoGuardado) <= 0){
-                    console.log(`Se creó en el LocalStorage: saldo_${usuarioLogeado} = ${elemento.saldo} [${verificarSaldoGuardado}] - usuario[${usuario}]`)
+                    //console.log(`Se creó en el LocalStorage: saldo_${usuarioLogeado} = ${elemento.saldo} [${verificarSaldoGuardado}] - usuario[${usuario}]`)
                     localStorage.setItem(`saldo_${usuario}`, parseInt(elemento.saldo))
                     saldo = parseInt(elemento.saldo);
                 }else{
-                    console.log(`Datos adquiridos en la DB: verificarSaldoGuardado[${verificarSaldoGuardado}] - usuario[${usuario}]`)
+                    //console.log(`Datos adquiridos en la DB: verificarSaldoGuardado[${verificarSaldoGuardado}] - usuario[${usuario}]`)
                     saldo = parseInt(verificarSaldoGuardado);
                 }
             }
