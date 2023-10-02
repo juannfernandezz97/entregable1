@@ -74,7 +74,7 @@ formulario.addEventListener("submit", (evento)=>{
     if(ingresoOk){
         sessionStorage.setItem("logeado", 1)
         sessionStorage.setItem("usuarioLogeado", usuario)
-        console.log("ingreso OK")
+        //console.log("ingreso OK")
         window.location.href = "/panel.html";
     }
 } )
